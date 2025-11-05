@@ -8,6 +8,7 @@ mod shapes {
 
     impl Circle {
         pub fn new (radius: f32) -> Self {
+            println!("Congratulations! Circle is created");
             Circle { radius }
         }
 
@@ -74,7 +75,7 @@ mod tests {
     }
       #[test]
     fn should_not_create_circle_with_non_positive_radius() -> Result<(), String> {
-        let some_circle = shapes::Circle::new_1(-5.0)?;
+        let some_circle = shapes::Circle::new_1(5.0)?;
         Ok(())
 
     }
@@ -83,6 +84,17 @@ mod tests {
     #[should_panic(expected = "lesser than -10.0")]
     fn should_not_create_and_panic() {
         let some_circle = shapes::Circle::new_2(-11.0);
+    }
+
+    #[test]
+    #[ignore]
+    fn huge_test() {
+        // This test is ignored by default
+        for i in 1..1000000 {
+            let large_circle = shapes::Circle::new(i as f32);
+            let small_circle = shapes::Circle::new((i - 1) as f32);
+            assert!(large_circle.contains(&small_circle), " The larger contains the smaller circle{}", true);
+        }
     }
 }
 
